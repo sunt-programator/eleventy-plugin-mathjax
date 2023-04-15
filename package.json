@@ -1,0 +1,43 @@
+{
+  "name": "11ty-plugin-mathjax",
+  "version": "1.0.0",
+  "description": "Eleventy plugin for supporting the MathJax library",
+  "main": ".eleventy.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunt-programator/eleventy-plugin-mathjax.git"
+  },
+  "keywords": [
+    "11ty",
+    "11ty-plugin",
+    "eleventy",
+    "eleventy-plugin",
+    "plugin",
+    "mathjax",
+    "tex",
+    "latex",
+    "math",
+    "mathml"
+  ],
+  "author": {
+    "name": "Victor Pogor",
+    "url": "https://github.com/victor-pogor"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sunt-programator/eleventy-plugin-mathjax/issues"
+  },
+  "homepage": "https://github.com/sunt-programator/eleventy-plugin-mathjax#readme",
+  "11ty": {
+    "compatibility": ">=2.0.0"
+  },
+  "devDependencies": {
+    "ava": "^5.2.0"
+  },
+  "dependencies": {
+    "mathjax-full": "^3.2.2"
+  }
+}
