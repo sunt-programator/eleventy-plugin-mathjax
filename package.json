@@ -4,8 +4,8 @@
   "description": "Eleventy plugin for supporting the MathJax library",
   "main": ".eleventy.js",
   "scripts": {
-    "test": "ava",
-    "testci": "ava --verbose --serial",
+    "test": "c8 ava",
+    "test:ci": "ava --verbose --serial",
     "sample": "npx @11ty/eleventy --input=test/sample",
     "prepare": "husky install",
     "release": "standard-version --sign",
@@ -44,13 +44,16 @@
     "compatibility": ">=2.0.0"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
     "ava": "^5.2.0",
+    "c8": "^7.13.0",
     "eslint": "^8.38.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
+    "jsdom": "^21.1.1",
     "prettier": "^2.8.7",
     "standard-version": "^9.5.0"
   },
@@ -61,7 +64,7 @@
   "ava": {
     "failFast": false,
     "files": [
-      "./test/*.js"
+      "./test/*.spec.cjs"
     ]
   }
 }

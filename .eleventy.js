@@ -4,6 +4,8 @@ const { mathjax } = require("mathjax-full/js/mathjax.js");
 const { AsciiMath } = require("mathjax-full/js/input/asciimath");
 const { MathML } = require("mathjax-full/js/input/mathml");
 const { TeX } = require("mathjax-full/js/input/tex.js");
+const { SVG } = require("mathjax-full/js/output/svg.js");
+const { CHTML } = require("mathjax-full/js/output/chtml.js");
 const { AllPackages } = require("mathjax-full/js/input/tex/AllPackages.js");
 const { liteAdaptor, LiteAdaptor } = require("mathjax-full/js/adaptors/liteAdaptor.js");
 const { RegisterHTMLHandler } = require("mathjax-full/js/handlers/html.js");
@@ -78,8 +80,8 @@ function init(eleventyConfig, configGlobalOptions = {}) {
     cleanOutput(mathDocument, adaptor, options);
 
     // Output the resulting HTML
-    const docType = adaptor.doctype(html.document);
-    const outerHTML = adaptor.outerHTML(adaptor.root(html.document));
+    const docType = adaptor.doctype(mathDocument.document);
+    const outerHTML = adaptor.outerHTML(adaptor.root(mathDocument.document));
     return `${docType}\n${outerHTML}\n`;
   });
 }
@@ -108,9 +110,9 @@ function createInput(options) {
 function createOutput(options) {
   switch (options.outputFormat) {
     case "chtml":
-      return new AsciiMath(options.chtml);
+      return new CHTML(options.chtml);
     case "svg":
-      return new MathML(options.svg);
+      return new SVG(options.svg);
     default:
       throw new TypeError('Invalid output format. Supported formats: "chtml" or "svg".');
   }

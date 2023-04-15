@@ -1,5 +1,5 @@
 {
-  "name": "suntprogramator.dev",
+  "name": "eleventy-plugin-mathjax",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:18",
   "mounts": [
     {
