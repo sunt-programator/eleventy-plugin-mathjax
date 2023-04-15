@@ -13,27 +13,13 @@ const { AssistiveMmlHandler } = require("mathjax-full/js/a11y/assistive-mml.js")
 const { AbstractMathDocument } = require("mathjax-full/js/core/MathDocument.js");
 
 /**
- * Options definition
- * @typedef {Object} Options
- * @property {("asciimath" | "mml" | "tex")} inputFormat The input format
- * @property {("chtml" | "svg")} outputFormat The output format
- * @property {Object.<string, any>} asciimath The AsciiMath input options
- * @property {Object.<string, any>} mml The MathML input options
- * @property {Object.<string, any>} tex The TeX input options
- * @property {Object.<string, any>} svg The SVG output options
- * @property {Object.<string, any>} chtml The CommonHTML output options
- * @property {Object.<string, any>} liteAdaptor The LiteAdaptor options
- * @property {Boolean} useAssistiveMml Whether to use assistive MathML
- */
-
-/**
- * Options definition
+ * Global options
  * @type {Options} Options
  */
 const globalOptions = {
   inputFormat: "tex",
   outputFormat: "chtml",
-  asciimath: {},
+  asciimath: { delimiters: [["\\(", "\\)"]] },
   mml: {},
   tex: {
     packages: AllPackages,
@@ -58,10 +44,6 @@ function init(eleventyConfig, configGlobalOptions = {}) {
 
   const options = lodashMerge({}, globalOptions, configGlobalOptions);
 
-  // Create input and output jax
-  const InputJax = createInput(options);
-  const OutputJax = createOutput(options);
-
   // Create DOM adaptor and register it for HTML documents
   const adaptor = liteAdaptor(options.liteAdaptor);
   const handler = RegisterHTMLHandler(adaptor);
@@ -70,20 +52,32 @@ function init(eleventyConfig, configGlobalOptions = {}) {
     AssistiveMmlHandler(handler);
   }
 
-  // Register the mathjax transformer for eleventy
-  eleventyConfig.addTransform("mathjax", function (content) {
-    // Create and typeset the document
-    const mathDocument = mathjax.document(content, { InputJax, OutputJax });
-    mathDocument.render();
+  eleventyConfig.addTransform("mathjax", (content) => mathJaxTransform(content, adaptor, options));
+}
 
-    // If no math was found on the page, remove the stylesheet
-    cleanOutput(mathDocument, adaptor, options);
+/**
+ * The mathjax transformer for eleventy
+ * @param {string} content The Eleventy content
+ * @param {LiteAdaptor} adaptor The Lite Adaptor
+ * @param {Options} options The MathJax options
+ */
+function mathJaxTransform(content, adaptor, options) {
+  // Create input and output jax
+  const InputJax = createInput(options);
+  const OutputJax = createOutput(options);
 
-    // Output the resulting HTML
-    const docType = adaptor.doctype(mathDocument.document);
-    const outerHTML = adaptor.outerHTML(adaptor.root(mathDocument.document));
-    return `${docType}\n${outerHTML}\n`;
-  });
+  // Create and typeset the document
+  const mathDocument = mathjax.document(content, { InputJax, OutputJax });
+  mathDocument.render();
+
+  // If no math was found on the page, remove the stylesheet
+  cleanOutput(mathDocument, adaptor, options);
+
+  // Output the resulting HTML
+  const docType = adaptor.doctype(mathDocument.document);
+  const outerHTML = adaptor.outerHTML(adaptor.root(mathDocument.document));
+
+  return `${docType}\n${outerHTML}\n`;
 }
 
 /**
@@ -120,23 +114,23 @@ function createOutput(options) {
 
 /**
  * @description If no math was found on the page, remove the stylesheet
- * @param {AbstractMathDocument} html The MathJax document
+ * @param {AbstractMathDocument} mathDocument The MathJax document
  * @param {LiteAdaptor} adaptor The Lite Adaptor
  * @param {Options} options The MathJax options
  */
-function cleanOutput(html, adaptor, options) {
-  if (Array.from(html.math).length > 0) {
+function cleanOutput(mathDocument, adaptor, options) {
+  if (Array.from(mathDocument.math).length > 0) {
     return;
   }
 
   if (options.outputFormat === "chtml") {
-    adaptor.remove(html.outputJax.chtmlStyles);
+    adaptor.remove(mathDocument.outputJax.chtmlStyles);
     return;
   }
 
   if (options.outputFormat === "svg") {
-    adaptor.remove(html.outputJax.svgStyles);
-    const cache = adaptor.elementById(adaptor.body(html.document), "MJX-SVG-global-cache");
+    adaptor.remove(mathDocument.outputJax.svgStyles);
+    const cache = adaptor.elementById(adaptor.body(mathDocument.document), "MJX-SVG-global-cache");
 
     if (cache) {
       adaptor.remove(cache);
@@ -147,3 +141,17 @@ function cleanOutput(html, adaptor, options) {
 }
 
 module.exports = init;
+
+/**
+ * Options definition
+ * @typedef {Object} Options
+ * @property {("asciimath" | "mml" | "tex")} inputFormat The input format
+ * @property {("chtml" | "svg")} outputFormat The output format
+ * @property {Object.<string, any>} asciimath The AsciiMath input options
+ * @property {Object.<string, any>} mml The MathML input options
+ * @property {Object.<string, any>} tex The TeX input options
+ * @property {Object.<string, any>} svg The SVG output options
+ * @property {Object.<string, any>} chtml The CommonHTML output options
+ * @property {Object.<string, any>} liteAdaptor The LiteAdaptor options
+ * @property {Boolean} useAssistiveMml Whether to use assistive MathML
+ */
