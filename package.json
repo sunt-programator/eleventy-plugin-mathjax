@@ -4,7 +4,8 @@
   "description": "Eleventy plugin for supporting the MathJax library",
   "main": ".eleventy.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,10 @@
     "compatibility": ">=2.0.0"
   },
   "devDependencies": {
-    "ava": "^5.2.0"
+    "@commitlint/cli": "^17.6.1",
+    "@commitlint/config-conventional": "^17.6.1",
+    "ava": "^5.2.0",
+    "husky": "^8.0.3"
   },
   "dependencies": {
     "mathjax-full": "^3.2.2"
