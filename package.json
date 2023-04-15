@@ -5,12 +5,15 @@
   "main": ".eleventy.js",
   "scripts": {
     "test": "ava",
+    "testci": "ava --verbose --serial",
+    "sample": "npx @11ty/eleventy --input=test/sample",
     "prepare": "husky install",
     "release": "standard-version --sign",
     "release:major": "standard-version --sign --release-as major",
     "release:minor": "standard-version --sign --release-as minor",
     "release:pre": "standard-version --sign --prerelease",
-    "release:pre:alpha": "standard-version --sign --prerelease alpha"
+    "release:pre:alpha": "standard-version --sign --prerelease alpha",
+    "format": "prettier --write *.{js,json,yml,yaml,css,scss,ts,tsx,md}"
   },
   "repository": {
     "type": "git",
@@ -44,10 +47,21 @@
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
     "ava": "^5.2.0",
+    "eslint": "^8.38.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
+    "prettier": "^2.8.7",
     "standard-version": "^9.5.0"
   },
   "dependencies": {
+    "lodash.merge": "^4.6.2",
     "mathjax-full": "^3.2.2"
+  },
+  "ava": {
+    "failFast": false,
+    "files": [
+      "./test/*.js"
+    ]
   }
 }
