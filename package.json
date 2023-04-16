@@ -4,6 +4,8 @@
   "description": "Eleventy plugin for supporting the MathJax library",
   "main": ".eleventy.js",
   "scripts": {
+    "demo": "npx @11ty/eleventy --input=demo --output=demo/_site --config=demo/eleventy-config.cjs",
+    "start": "npx @11ty/eleventy --input=demo --output=demo/_site --config=demo/eleventy-config.cjs --serve",
     "test": "c8 ava",
     "test:ci": "ava --verbose --serial",
     "sample": "npx @11ty/eleventy --input=test/sample",
