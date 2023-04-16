@@ -4,10 +4,11 @@
     "commonjs": true,
     "es2021": true
   },
-  "extends": ["google", "prettier"],
+  "extends": ["google", "prettier", "plugin:sonarjs/recommended"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest"
   },
-  "rules": {}
+  "rules": {},
+  "plugins": ["sonarjs", "jsdoc"]
 }

@@ -8,8 +8,8 @@ const { SVG } = require("mathjax-full/js/output/svg.js");
 const { CHTML } = require("mathjax-full/js/output/chtml.js");
 const { AllPackages } = require("mathjax-full/js/input/tex/AllPackages.js");
 const { liteAdaptor, LiteAdaptor } = require("mathjax-full/js/adaptors/liteAdaptor.js");
-const { RegisterHTMLHandler } = require("mathjax-full/js/handlers/html.js");
-const { AssistiveMmlHandler } = require("mathjax-full/js/a11y/assistive-mml.js");
+const { RegisterHTMLHandler: registerHTMLHandler } = require("mathjax-full/js/handlers/html.js");
+const { AssistiveMmlHandler: assistiveMmlHandler } = require("mathjax-full/js/a11y/assistive-mml.js");
 const { AbstractMathDocument } = require("mathjax-full/js/core/MathDocument.js");
 
 /**
@@ -32,7 +32,7 @@ const globalOptions = {
 
 /**
  * Initialize the plugin
- * @param eleventyConfig The eleventy config
+ * @param {Object} eleventyConfig The eleventy config
  * @param {Options} configGlobalOptions The MathJax options
  */
 function init(eleventyConfig, configGlobalOptions = {}) {
@@ -46,10 +46,10 @@ function init(eleventyConfig, configGlobalOptions = {}) {
 
   // Create DOM adaptor and register it for HTML documents
   const adaptor = liteAdaptor(options.liteAdaptor);
-  const handler = RegisterHTMLHandler(adaptor);
+  const handler = registerHTMLHandler(adaptor);
 
   if (options.useAssistiveMml) {
-    AssistiveMmlHandler(handler);
+    assistiveMmlHandler(handler);
   }
 
   eleventyConfig.addTransform("mathjax", (content) => mathJaxTransform(content, adaptor, options));
@@ -60,6 +60,7 @@ function init(eleventyConfig, configGlobalOptions = {}) {
  * @param {string} content The Eleventy content
  * @param {LiteAdaptor} adaptor The Lite Adaptor
  * @param {Options} options The MathJax options
+ * @return {string} The transformed MathJax document to HTML
  */
 function mathJaxTransform(content, adaptor, options) {
   // Create input and output jax
@@ -83,6 +84,8 @@ function mathJaxTransform(content, adaptor, options) {
 /**
  * Creates a MathJax Input instance based on a selected input format
  * @param {Options} options The MathJax options
+ * @return {AsciiMath | MathML | TeX} A MathJax input object based on selected type
+ * @throws {TypeError} When the input format is invalid
  */
 function createInput(options) {
   switch (options.inputFormat) {
@@ -100,6 +103,8 @@ function createInput(options) {
 /**
  * Creates a MathJax Output instance based on a selected output format
  * @param {Options} options The MathJax options
+ * @return {CHTML | SVG} A MathJax output object based on selected type
+ * @throws {TypeError} When the output format is invalid
  */
 function createOutput(options) {
   switch (options.outputFormat) {
@@ -135,8 +140,6 @@ function cleanOutput(mathDocument, adaptor, options) {
     if (cache) {
       adaptor.remove(cache);
     }
-
-    return;
   }
 }
 
