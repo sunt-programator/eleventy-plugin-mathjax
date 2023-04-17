@@ -1,5 +1,5 @@
 {
-  "name": "11ty-plugin-mathjax",
+  "name": "@sunt-programator/eleventy-plugin-mathjax",
   "version": "1.0.0",
   "description": "Eleventy plugin for supporting the MathJax library",
   "main": "eleventy.cjs",
@@ -70,5 +70,8 @@
     "files": [
       "./test/*.spec.cjs"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -29,19 +29,19 @@
 Install the plugin by using the following command:
 
 ```shell
-npm install --save-dev 11ty-plugin-mathjax
+npm install --save-dev @sunt-programator/eleventy-plugin-mathjax
 ```
 
 Or use this command in case you are using the [Yarn](https://yarnpkg.com/) package manager:
 
 ```shell
-yarn add --dev 11ty-plugin-mathjax
+yarn add --dev @sunt-programator/eleventy-plugin-mathjax
 ```
 
 Next, add this plugin into your Eleventy configuration file (e.g. `eleventy.config.js`):
 
 ```js
-const mathjaxPlugin = require("11ty-plugin-mathjax");
+const mathjaxPlugin = require("@sunt-programator/eleventy-plugin-mathjax");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(mathjaxPlugin);
