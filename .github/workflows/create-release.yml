@@ -1,10 +1,12 @@
-name: Node.js CI
+name: Release
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.head_ref || github.run_id }}
@@ -13,20 +15,11 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16
           cache: "npm"
       - name: Get npm cache directory
         id: npm-cache-dir
@@ -41,13 +34,14 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install npm packages
         run: npm ci
-      - name: Build a demo site
-        run: npm run demo
       - name: Tests & Coverage
         run: npm run test:ci
-      - name: SonarQube Scan
-        if: matrix.node-version == '18.x'
-        uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+      - name: Pack
+        run: npm pack
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: CHANGELOG.md
+          files: |
+            CHANGELOG.md
+            11ty-plugin-mathjax-*.tgz
