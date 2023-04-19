@@ -22,6 +22,7 @@
   <a href="https://www.codefactor.io/repository/github/sunt-programator/eleventy-plugin-mathjax"><img src="https://www.codefactor.io/repository/github/sunt-programator/eleventy-plugin-mathjax/badge" alt="CodeFactor"></a>
   <a href="https://snyk.io/test/github/sunt-programator/eleventy-plugin-mathjax"><img src="https://snyk.io/test/github/sunt-programator/eleventy-plugin-mathjax/badge.svg" alt="Known Vulnerabilities"></a>
   <a href="https://api.securityscorecards.dev/projects/github.com/sunt-programator/eleventy-plugin-mathjax"><img src="https://api.securityscorecards.dev/projects/github.com/sunt-programator/eleventy-plugin-mathjax/badge" alt="Scorecard score"/></a>
+  <a href="https://bestpractices.coreinfrastructure.org/projects/7247"><img src="https://bestpractices.coreinfrastructure.org/projects/7247/badge" alt="OpenSSF Best Practices"></a>
   <hr />
 </div>
 
