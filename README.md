@@ -7,6 +7,7 @@
 <div align="center">
   <hr />
   <p>Repository Stats:</p>
+  <img src="https://img.shields.io/github/package-json/v/sunt-programator/eleventy-plugin-mathjax" alt="GitHub package.json version">
   <a href="https://github.com/sunt-programator/eleventy-plugin-mathjax/stargazers"><img src="https://img.shields.io/github/stars/sunt-programator/eleventy-plugin-mathjax" alt="Stars Badge"/></a>
   <a href="https://github.com/sunt-programator/eleventy-plugin-mathjax/network/members"><img src="https://img.shields.io/github/forks/sunt-programator/eleventy-plugin-mathjax" alt="Forks Badge"/></a>
   <a href="https://github.com/sunt-programator/eleventy-plugin-mathjax/pulls"><img src="https://img.shields.io/github/issues-pr/sunt-programator/eleventy-plugin-mathjax" alt="Pull Requests Badge"/></a>
@@ -15,16 +16,16 @@
   <a href="https://github.com/sunt-programator/eleventy-plugin-mathjax/blob/master/LICENSE"><img src="https://img.shields.io/github/license/sunt-programator/eleventy-plugin-mathjax?color=2b9348" alt="License Badge"/></a>
   <hr />
   <p>Code Quality Stats:</p>
-  <img src="https://img.shields.io/github/package-json/v/sunt-programator/eleventy-plugin-mathjax" alt="GitHub package.json version">
   <a href="https://github.com/sunt-programator/eleventy-plugin-mathjax/actions/workflows/node.js.yml"><img src="https://github.com/sunt-programator/eleventy-plugin-mathjax/actions/workflows/node.js.yml/badge.svg" alt="Github Actions Build Status"></a>
   <a href="https://sonarcloud.io/summary/new_code?id=sunt-programator_eleventy-plugin-mathjax"><img src="https://sonarcloud.io/api/project_badges/measure?project=sunt-programator_eleventy-plugin-mathjax&amp;metric=alert_status" alt="Quality Gate Status"></a>
   <a href="https://sonarcloud.io/summary/new_code?id=sunt-programator_eleventy-plugin-mathjax"><img src="https://sonarcloud.io/api/project_badges/measure?project=sunt-programator_eleventy-plugin-mathjax&amp;metric=coverage" alt="Coverage"></a>
   <a href="https://www.codefactor.io/repository/github/sunt-programator/eleventy-plugin-mathjax"><img src="https://www.codefactor.io/repository/github/sunt-programator/eleventy-plugin-mathjax/badge" alt="CodeFactor"></a>
   <a href="https://snyk.io/test/github/sunt-programator/eleventy-plugin-mathjax"><img src="https://snyk.io/test/github/sunt-programator/eleventy-plugin-mathjax/badge.svg" alt="Known Vulnerabilities"></a>
+  <a href="https://api.securityscorecards.dev/projects/github.com/sunt-programator/eleventy-plugin-mathjax"><img src="https://api.securityscorecards.dev/projects/github.com/sunt-programator/eleventy-plugin-mathjax/badge" alt="Scorecard score"/></a>
   <hr />
 </div>
 
-## ⚡️ Quick start
+## <a name="quick-start"></a>⚡️ Quick start
 
 Install the plugin by using the following command:
 
@@ -48,7 +49,7 @@ module.exports = function (eleventyConfig) {
 };
 ```
 
-## 🕘 Usage
+## <a name="usage"></a>🕘 Usage
 
 For a block math, use the `$$...$$` notation:
 
@@ -76,7 +77,7 @@ This will render to:
 
 > This is an inline math: $x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$.
 
-## 🗿 Options
+## <a name="options"></a>🗿 Options
 
 This plugins supports overriding the global options by passing to the `addPlugin` function an object as a second argument:
 
@@ -126,13 +127,14 @@ const globalOptions = {
 | useAssistiveMml | The flag indicating whether to use the assistive MathML. |
 <!-- prettier-ignore-end -->
 
-## 💡 Inspiration
+## <a name="inspiration"></a>💡 Inspiration
 
 This plugin used two repos as an inspiration:
 
-1. [MathJax Node Demos](https://github.com/mathjax/MathJax-demos-node)
-2. [eleventy-plugin-mathjax](https://github.com/tsung-ju/eleventy-plugin-mathjax) by [Tsung-Ju Chiang](https://github.com/tsung-ju)
+1. [MathJax Node Demos](https://github.com/mathjax/MathJax-demos-node) - Integration with MathJax
+2. [eleventy-plugin-mathjax](https://github.com/tsung-ju/eleventy-plugin-mathjax) by [Tsung-Ju Chiang](https://github.com/tsung-ju) - Plugin implementation
+3. [Angular](https://github.com/angular/angular) - Community Standards files
 
-## 📰 License
+## <a name="license"></a>📰 License
 
 This plugin is [MIT](LICENSE) licensed.

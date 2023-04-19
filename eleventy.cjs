@@ -9,8 +9,10 @@ const { CHTML } = require("mathjax-full/js/output/chtml.js");
 const { AllPackages } = require("mathjax-full/js/input/tex/AllPackages.js");
 const { liteAdaptor, LiteAdaptor } = require("mathjax-full/js/adaptors/liteAdaptor.js");
 const { RegisterHTMLHandler: registerHTMLHandler } = require("mathjax-full/js/handlers/html.js");
-const { AssistiveMmlHandler: assistiveMmlHandler } = require("mathjax-full/js/a11y/assistive-mml.js");
 const { AbstractMathDocument } = require("mathjax-full/js/core/MathDocument.js");
+const {
+  AssistiveMmlHandler: assistiveMmlHandler,
+} = require("mathjax-full/js/a11y/assistive-mml.js");
 
 /**
  * Global options
