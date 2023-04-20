@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/sunt-programator/eleventy-plugin-mathjax/compare/v1.0.0...v1.0.1) (2023-04-20)
+
+
+### Bug Fixes
+
+* **plugin:** skip math parse on non-html files ([f4a5d7c](https://github.com/sunt-programator/eleventy-plugin-mathjax/commit/f4a5d7cf68caf65700e3cd14bc03a9322471f415))
+
 ## 1.0.0 (2023-04-17)
 
 ### Features

@@ -1,6 +1,6 @@
 {
   "name": "@sunt-programator/eleventy-plugin-mathjax",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Eleventy plugin for supporting the MathJax library",
   "main": "eleventy.cjs",
   "scripts": {
@@ -11,10 +11,6 @@
     "sample": "npx @11ty/eleventy --input=test/sample",
     "prepare": "husky install",
     "release": "standard-version --sign",
-    "release:major": "standard-version --sign --release-as major",
-    "release:minor": "standard-version --sign --release-as minor",
-    "release:pre": "standard-version --sign --prerelease",
-    "release:pre:alpha": "standard-version --sign --prerelease alpha",
     "format": "prettier --write *.{js,cjs,mjs,json,yml,yaml,css,scss,ts,tsx,md}"
   },
   "repository": {
