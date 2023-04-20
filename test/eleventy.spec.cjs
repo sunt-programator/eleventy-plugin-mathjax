@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc */
+/* eslint-disable sonarjs/no-duplicate-string */
 const test = require("ava");
 const Eleventy = require("@11ty/eleventy");
 const { JSDOM } = require("jsdom");
@@ -53,11 +55,15 @@ test("Test if TeX input format returns a valid MathJax object", async (t) => {
 });
 
 test("Test if AsciiMath input format returns a valid MathJax object", async (t) => {
-  const eleventy = new Eleventy("./test/input-format-asciimath/", "./test/input-format-asciimath/_site/", {
-    config: function (eleventyConfig) {
-      eleventyConfig.addPlugin(mathJaxPlugin, { inputFormat: "asciimath" });
-    },
-  });
+  const eleventy = new Eleventy(
+    "./test/input-format-asciimath/",
+    "./test/input-format-asciimath/_site/",
+    {
+      config: function (eleventyConfig) {
+        eleventyConfig.addPlugin(mathJaxPlugin, { inputFormat: "asciimath" });
+      },
+    }
+  );
 
   const json = await eleventy.toJSON();
   const dom = new JSDOM(json[0].content.trim());
@@ -68,11 +74,15 @@ test("Test if AsciiMath input format returns a valid MathJax object", async (t) 
 });
 
 test("Test if MathML input format returns a valid MathJax object", async (t) => {
-  const eleventy = new Eleventy("./test/input-format-mathml/", "./test/input-format-mathml/_site/", {
-    config: function (eleventyConfig) {
-      eleventyConfig.addPlugin(mathJaxPlugin, { inputFormat: "mml" });
-    },
-  });
+  const eleventy = new Eleventy(
+    "./test/input-format-mathml/",
+    "./test/input-format-mathml/_site/",
+    {
+      config: function (eleventyConfig) {
+        eleventyConfig.addPlugin(mathJaxPlugin, { inputFormat: "mml" });
+      },
+    }
+  );
 
   const json = await eleventy.toJSON();
   const dom = new JSDOM(json[0].content.trim());
@@ -87,7 +97,7 @@ test("The MathJax plugin with an invalid input format should throw an exception"
     mathJaxPlugin(
       {
         versionCheck: () => true,
-        addTransform: (_pluginName, transformFn) => transformFn("empty content"),
+        addTransform: (_pluginName, transformFn) => transformFn("empty content", "index.html"),
       },
       { inputFormat: "invalid_format" }
     );
@@ -101,7 +111,7 @@ test("The MathJax plugin with an invalid output format should throw an exception
     mathJaxPlugin(
       {
         versionCheck: () => true,
-        addTransform: (_pluginName, transformFn) => transformFn("empty content"),
+        addTransform: (_pluginName, transformFn) => transformFn("empty content", "index.html"),
       },
       { outputFormat: "invalid_format" }
     );
@@ -113,7 +123,10 @@ test("The MathJax plugin with an invalid output format should throw an exception
 test("Test the global font cache on SVG output", async (t) => {
   const eleventy = new Eleventy("./test/output-format/", "./test/output-format/_site/", {
     config: function (eleventyConfig) {
-      eleventyConfig.addPlugin(mathJaxPlugin, { outputFormat: "svg", svg: { fontCache: "global" } });
+      eleventyConfig.addPlugin(mathJaxPlugin, {
+        outputFormat: "svg",
+        svg: { fontCache: "global" },
+      });
     },
   });
 
@@ -145,7 +158,10 @@ test("Test if CHTML styles are cleared if there is no math on page", async (t) =
 test("Test if SVG styles are cleared if there is no math on page", async (t) => {
   const eleventy = new Eleventy("./test/no-math/", "./test/no-math/_site/", {
     config: function (eleventyConfig) {
-      eleventyConfig.addPlugin(mathJaxPlugin, { outputFormat: "svg", svg: { fontCache: "global" } });
+      eleventyConfig.addPlugin(mathJaxPlugin, {
+        outputFormat: "svg",
+        svg: { fontCache: "global" },
+      });
     },
   });
 
@@ -182,4 +198,22 @@ test("Test if a site with multiple pages doesn't lose the styles", async (t) => 
 
   t.is(mathJaxContainer2.getAttribute("jax"), "CHTML");
   t.truthy(chtmlStyles2);
+});
+
+test("Test if MathJax transform won't change the non-html files", async (t) => {
+  const eleventy = new Eleventy(
+    "./test/no-parse-on-non-html-files/",
+    "./test/no-parse-on-non-html-files/_site/",
+    {
+      config: function (eleventyConfig) {
+        eleventyConfig.addPlugin(mathJaxPlugin);
+      },
+    }
+  );
+
+  const expectedContent =
+    '{\n  "version": "https://jsonfeed.org/version/1.1",\n  "title": "eleventy-plugin-mathjax"\n}\n';
+
+  const json = await eleventy.toJSON();
+  t.is(json[0].content, expectedContent);
 });

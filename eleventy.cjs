@@ -54,17 +54,26 @@ function init(eleventyConfig, configGlobalOptions = {}) {
     assistiveMmlHandler(handler);
   }
 
-  eleventyConfig.addTransform("mathjax", (content) => mathJaxTransform(content, adaptor, options));
+  eleventyConfig.addTransform("mathjax", (content, outputPath) =>
+    mathJaxTransform(content, outputPath, adaptor, options)
+  );
 }
 
 /**
  * The mathjax transformer for eleventy
  * @param {string} content The Eleventy content
+ * @param {string} outputPath The output path of the generated file
  * @param {LiteAdaptor} adaptor The Lite Adaptor
  * @param {Options} options The MathJax options
  * @return {string} The transformed MathJax document to HTML
  */
-function mathJaxTransform(content, adaptor, options) {
+function mathJaxTransform(content, outputPath, adaptor, options) {
+  const isHtmlFile = outputPath && outputPath.endsWith(".html");
+
+  if (!isHtmlFile) {
+    return content;
+  }
+
   // Create input and output jax
   const InputJax = createInput(options);
   const OutputJax = createOutput(options);
