@@ -17,12 +17,15 @@
         "eamodio.gitlens",
         "pflannery.vscode-versionlens",
         "streetsidesoftware.code-spell-checker",
-        "ronnidc.nunjucks"
+        "ronnidc.nunjucks",
+        "GitHub.vscode-github-actions"
       ],
       "settings": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "vsicons.associations.files": [{ "icon": "eleventy", "extensions": [".eleventyignore"], "format": "svg" }]
+        "vsicons.associations.files": [
+          { "icon": "eleventy", "extensions": [".eleventyignore"], "format": "svg" }
+        ]
       }
     }
   },

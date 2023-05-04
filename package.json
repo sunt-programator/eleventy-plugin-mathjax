@@ -43,18 +43,18 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
-    "@commitlint/cli": "^17.6.1",
-    "@commitlint/config-conventional": "^17.6.1",
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
     "ava": "^5.2.0",
     "c8": "^7.13.0",
-    "eslint": "^8.38.0",
+    "eslint": "^8.40.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-jsdoc": "^43.0.6",
+    "eslint-plugin-jsdoc": "^44.0.0",
     "eslint-plugin-sonarjs": "^0.19.0",
     "husky": "^8.0.3",
-    "jsdom": "^21.1.1",
-    "prettier": "^2.8.7",
+    "jsdom": "^22.0.0",
+    "prettier": "^2.8.8",
     "standard-version": "^9.5.0"
   },
   "dependencies": {
@@ -69,5 +69,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">=18.16.0"
   }
 }

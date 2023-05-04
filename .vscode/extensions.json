@@ -6,6 +6,7 @@
     "eamodio.gitlens",
     "pflannery.vscode-versionlens",
     "streetsidesoftware.code-spell-checker",
-    "ronnidc.nunjucks"
+    "ronnidc.nunjucks",
+    "GitHub.vscode-github-actions"
   ]
 }
