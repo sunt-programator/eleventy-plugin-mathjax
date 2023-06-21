@@ -52,7 +52,7 @@ jobs:
         run: npm run test:ci
       - name: SonarQube Scan
         if: ${{ matrix.node-version == '18.x' && !contains(github.event.head_commit.author.email, 'dependabot') && github.event_name != 'pull_request' }}
-        uses: sonarsource/sonarqube-scan-action@d57dba2a10caaa2039d45acf314f9776e2741047 # master
+        uses: sonarsource/sonarqube-scan-action@5829c57497eaadbaf52ac576a680c577ee2d17be # master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
